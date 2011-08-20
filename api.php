@@ -52,9 +52,9 @@ if ( strtolower( $format ) == 'json' || strtolower( $format ) == 'jsonp' ) {
 	
 	//if user provided a callback, and callback still is valid after sanitization, return JSONP
 	if ( !empty( $callback ) )
-		echo $callback . '('.  json_encode( $sorted ) . ');';
+		echo $callback . '('.  json_encode( $sorted, JSON_NUMERIC_CHECK) . ');';
 	else //return plain JSON 	
-		echo json_encode( $sorted );
+		echo json_encode( $sorted, JSON_NUMERIC_CHECK );
 	
 	exit(); 
 }
