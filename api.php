@@ -44,6 +44,9 @@ $format = isset( $_REQUEST['format'] ) ? $_REQUEST['format'] : 'json';
 //if format is json (or no format given), merge-sort, encode as json, and exit
 if ( strtolower( $format ) == 'json' || strtolower( $format ) == 'jsonp' ) {
 	
+	//provide header so browsers render properly
+	header('Content-type: application/json');
+	
 	//santize callback
 	$callback = ( !empty( $_REQUEST['callback'] ) ) ? preg_replace( '/[^a-z0-9-_.]/i', '', $_REQUEST['callback'] ) : null;
 	
@@ -82,6 +85,9 @@ if ( strtolower( $format ) == 'json' || strtolower( $format ) == 'jsonp' ) {
 //parse array into a string for XML 
 $formatted = implode(', ', $sorted );
 
+//provide header so browsers render properly
+header ("Content-Type:text/xml");  
+
 //echo opening XML tag in case apache has short PHP tags on
 echo '<?xml version="1.0" ?>' . "\n";
 ?>
@@ -93,5 +99,5 @@ echo '<?xml version="1.0" ?>' . "\n";
 <?php foreach ( $sorted as $elem ) { ?>
 		<element><?php echo $elem; ?></element>
 <?php } ?>
-	<raw>
+	</raw>
 </results>
