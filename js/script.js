@@ -21,6 +21,7 @@ jQuery(document).ready( function( $ ){
 			url: 'api.php',
 			dataType: 'jsonp',
 			data: $('#input').serialize(),
+			type: 'POST',
 			success: function( data ){
 				
 				//remove loader timeout and hide loader if shown
