@@ -21,7 +21,7 @@ if ( !isset( $_REQUEST['input'] ) ) {
 }
 
 //sanitize user input
-$input = preg_replace( '/[^0-9,]/', '', $_REQUEST['input'] );
+$input = preg_replace( '/[^0-9,.]/', '', $_REQUEST['input'] );
 
 //parse input into arary
 $input = explode( ',', $input );
