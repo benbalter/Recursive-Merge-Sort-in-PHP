@@ -41,6 +41,18 @@ jQuery(document).ready( function( $ ){
 		});
 	});
 
+	$('.api').click( function( event ) {
+	
+		var url = 'api.php?' + $('#input').serialize() + '&format=' + $(this).attr('id');
+		
+		if ( $(this).attr('id') == 'jsonp' )
+			url += '&callback=' + prompt( 'Callback?' );
+
+		$(location).attr('href', url );
+		
+		event.preventDefault();
+		return false;
+	});
 }); 
 
 

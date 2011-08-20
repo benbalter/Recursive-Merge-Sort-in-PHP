@@ -29,6 +29,12 @@ $input = explode( ',', $input );
 //remove empty elements that emerged as a result of sanitization
 $input = array_filter( $input );
 
+//verify that the user passed input
+if ( empty( $input ) ) {
+	header( 'HTTP/1.1 400 Bad Request' );
+	die('Please pass at least one numeric value as a comma separated list in the "input" field');
+}
+
 //merge-sort
 $sorted = bb_merge_sort( $input );
 
@@ -36,14 +42,14 @@ $sorted = bb_merge_sort( $input );
 $format = isset( $_REQUEST['format'] ) ? $_REQUEST['format'] : 'json';
 
 //if format is json (or no format given), merge-sort, encode as json, and exit
-if ( strtolower( $format ) == 'json' ) {
+if ( strtolower( $format ) == 'json' || strtolower( $format ) == 'jsonp' ) {
 	
 	//santize callback
 	$callback = ( !empty( $_REQUEST['callback'] ) ) ? preg_replace( '/[^a-z0-9-_.]/i', '', $_REQUEST['callback'] ) : null;
 	
 	//if user provided a callback, and callback still is valid after sanitization, return JSONP
 	if ( !empty( $callback ) )
-		echo $callback . '('.  json_encode( $sorted ) . ')';
+		echo $callback . '('.  json_encode( $sorted ) . ');';
 	else //return plain JSON 	
 		echo json_encode( $sorted );
 	
