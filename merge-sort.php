@@ -13,7 +13,7 @@
 function bb_merge_sort( $array ) {
 
     //if array is but one element, array is sorted, so return as is
-    if ( sizeof ( $array ) == 1 )
+    if ( sizeof ( $array ) <= 1 )
     	return $array;
     	
     //bifurcate unsorted array
